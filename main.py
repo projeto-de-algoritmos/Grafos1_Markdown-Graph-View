@@ -1,76 +1,29 @@
 import pygame
 import sys
 
+from models.Graph import Graph, Edge
+from models.Note import Note
+
 pygame.init()
 
-class Node:
-    def __init__(self, x, y, label):
-        self.x = x
-        self.y = y
-        self.label = label
-        self.color = (255, 255, 255)
-        self.dragging = False # flag to indicate if node is being dragged
+SCREEN_WIDTH = 1200
+SCREEN_HEIGHT = 1000
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT))
 
-    def update_position(self, new_x, new_y):
-        self.x = new_x
-        self.y = new_y
-
-class Edge:
-    def __init__(self, start_node, end_node):
-        self.start_node = start_node
-        self.end_node = end_node
-        self.color = (255, 255, 255)
-        self.spring_constant = 0.01 # add spring constant attribute
-
-    def change_color(self, new_color):
-        self.color = new_color
-
-screen_width = 800
-screen_height = 600
-screen = pygame.display.set_mode((screen_width, screen_height))
-
-node_list = [
-    Node(100, 100, "Note 1"),
-    Node(120, 100, "Note 2"),
-    Node(140, 100, "Note 3"),
-    Node(160, 100, 'Note 4'),
-    Node(180, 100, 'Note 5'),
-    Node(150, 100, 'Note 6'),
-    Node(160, 100, 'Note 7'),
-    Node(170, 100, 'Note 8'),
-    Node(180, 100, 'Note 9'),
-]
-
-edge_list = [
-    Edge(node_list[0], node_list[1]),
-    Edge(node_list[0], node_list[2]),
-    Edge(node_list[1], node_list[2]),
-    Edge(node_list[2], node_list[3]),
-    Edge(node_list[2], node_list[5]),
-    Edge(node_list[3], node_list[4]),
-    Edge(node_list[3], node_list[5]),
-    Edge(node_list[4], node_list[6]),
-    Edge(node_list[4], node_list[7]),
-    Edge(node_list[8], node_list[1])
-]
-
-edge_list[0].change_color((255, 255, 0))
-
-def draw_nodes(node_list):
-    for node in node_list:
-        pygame.draw.circle(screen, node.color, (node.x, node.y), 15)
+def draw_nodes(graph: Graph):
+    for node, neighbors in graph.adj_list.items():
+        pygame.draw.circle(screen, node.color, (node.x, node.y), node.size)
         font = pygame.font.SysFont(None, 20)
-        label = font.render(node.label, True, (255,255,255))
+        label = font.render(node.filename, True, (255,255,255))
         screen.blit(label, (node.x - label.get_width() // 2, node.y - 20 - label.get_height()))
 
+def draw_edges(graph: Graph):
+    for edge in graph.edge_list:
+        pygame.draw.line(screen, edge.color, (edge.node1.x, edge.node1.y), (edge.node2.x, edge.node2.y), 2)
 
-
-def draw_edges(edge_list):
-    for edge in edge_list:
-        pygame.draw.line(screen, edge.color, (edge.start_node.x, edge.start_node.y), (edge.end_node.x, edge.end_node.y), 2)
-
-def update_node_positions(node_list, min_distance=50):
+def update_node_positions(graph: Graph, min_distance=50):
     # calculate force vectors between nodes
+    node_list = graph.get_nodes()
     for i in range(len(node_list)):
         for j in range(i+1, len(node_list)):
             node1 = node_list[i]
@@ -90,7 +43,9 @@ def update_node_positions(node_list, min_distance=50):
                 node2.y += node2_y_force
 
 
-def handle_events(node_list):
+def handle_events(graph: Graph):
+    node_list = graph.get_nodes()
+    edge_list = graph.edge_list
     node_color = (255, 255, 255) # initialize node_color variable
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
@@ -122,11 +77,32 @@ def handle_events(node_list):
                 if node.dragging == True:
                     node.update_position(event.pos[0], event.pos[1])
     # update node positions based on repelling forces
-    update_node_positions(node_list)
+    update_node_positions(graph)
+
+
+main_graph = Graph()
+
+notas = [
+    Note(100, 120, 'Bancos de dados relacionais'),
+    Note(120, 140, 'Declaracoes'),
+    Note(140, 160, 'Instroducao ao SQL'),
+    Note(160, 180, 'Tipo de dado')
+]
+
+arestas = [
+    Edge(notas[0], notas[1]),
+    Edge(notas[2], notas[3])
+]
+
+for nota in notas:
+    main_graph.add_node(nota)
+
+for aresta in arestas:
+    main_graph.add_edge(aresta)
 
 while True:
-    handle_events(node_list)
+    handle_events(main_graph)
     screen.fill((0, 0, 0))
-    draw_nodes(node_list)
-    draw_edges(edge_list)
+    draw_nodes(main_graph)
+    draw_edges(main_graph)
     pygame.display.update()

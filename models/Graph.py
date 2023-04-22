@@ -1,11 +1,13 @@
-from LinkedList import LinkedList
-from Note import Note
+from models.LinkedList import LinkedList
+from models.Note import Note
 from collections import deque
 
 class Edge:
-    def __init__(self, node1, node2):
+    def __init__(self, node1, node2, color=(255, 255, 255)):
         self.node1 = node1
         self.node2 = node2
+        self.color = color
+        self.spring_constant = 0.01
 
     def __str__(self):
         return f"({str(self.node1)}, {str(self.node2)})"
@@ -16,6 +18,7 @@ class Edge:
 class Graph:
     def __init__(self):
         self.adj_list = {}
+        self.edge_list = []
 
     def __str__(self):
         result = ''
@@ -26,11 +29,15 @@ class Graph:
             result += '\n'
         return result
 
+    def get_nodes(self):
+        return list(self.adj_list.keys())
+
     def add_node(self, node):
         if node not in self.adj_list:
             self.adj_list[node] = LinkedList()
 
     def add_edge(self, edge):
+        self.edge_list.append(edge)
         if edge.node1 not in self.adj_list:
             self.add_node(edge.node1)
         if edge.node2 not in self.adj_list:
