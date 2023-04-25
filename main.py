@@ -1,10 +1,19 @@
 import pygame
+import pygame_gui
 import sys
+import math
 
 from models.Graph import Graph, Edge
 from models.Note import Note
 
+
 pygame.init()
+
+#colors
+RED = (255, 0, 0)
+GREEN = (0, 255, 0)
+WHITE = (255, 255, 255)
+BLACK = (0, 0, 0, 0)
 
 SCREEN_WIDTH = 800
 SCREEN_HEIGHT = 800
@@ -13,11 +22,18 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.RESIZABLE
 def draw_nodes(graph: Graph):
     for node, neighbors in graph.adj_list.items():
         pygame.draw.circle(screen, node.color, (node.x, node.y), node.radius)
+        if node.text is not None: # if the node has text
+            font = pygame.font.SysFont(None, 20)
+            if node.color != WHITE:
+                text_surface = font.render(node.text, True, WHITE)
+            else:
+                text_surface = font.render(node.text, True, BLACK)
+            text_rect = text_surface.get_rect(center=(node.x, node.y)) # get the rectangle that centers the text surface on the node position
+            screen.blit(text_surface, text_rect) # blit the text surface onto the screen at the text rectangle position
         font = pygame.font.SysFont(None, 20)
         label = font.render(node.filename, True, (255,255,255))
         screen.blit(label, (node.x - label.get_width() // 2, node.y - 20 - label.get_height()))
 
-import math
 
 def draw_arrow(screen, edge):
     start_node = edge.start_node
@@ -51,7 +67,8 @@ def draw_edges(graph: Graph):
     for edge in graph.edge_list:
         draw_arrow(screen, edge)
 
-def update_node_positions(graph: Graph, min_distance=50):
+
+def update_node_positions(graph: Graph, min_distance=100):
     # calculate force vectors between nodes
     node_list = graph.get_nodes()
     for i in range(len(node_list)):
@@ -72,10 +89,9 @@ def update_node_positions(graph: Graph, min_distance=50):
                 node2.x += node2_x_force
                 node2.y += node2_y_force
 
-def handle_events(graph: Graph):
+def handle_events(graph: Graph, counter: int):
     node_list = graph.get_nodes()
     edge_list = graph.edge_list
-    node_color = (255, 255, 255) # initialize node_color variable
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -84,23 +100,30 @@ def handle_events(graph: Graph):
             for node in node_list:
                 if node.dragging == False:
                     if event.button == 1:
-                        if node.x - 20 <= event.pos[0] <= node.x + 20 and node.y - 20 <= event.pos[1] <= node.y + 20:
+                        if node.x - node.radius <= event.pos[0] <= node.x + node.radius and node.y - node.radius <= event.pos[1] <= node.y + node.radius:
+                            if node.color == GREEN:
+                                node.text = None
+                                counter-=1
                             node.dragging = True
-                            node_color = node.color
-                            node.color = (255, 0, 0) # change node color when it is being dragged
+                            node.color = RED # change node color when it is being dragged
                     elif event.button == 3:
-                        # right-click to delete node
-                        if node.x - 20 <= event.pos[0] <= node.x + 20 and node.y - 20 <= event.pos[1] <= node.y + 20:
-                            node_list.remove(node)
-                            # remove edges connected to the deleted node
-                            for edge in edge_list:
-                                if edge.start_node == node or edge.end_node == node:
-                                    edge_list.remove(edge)
+                        if node.x - node.radius <= event.pos[0] <= node.x + node.radius and node.y - node.radius <= event.pos[1] <= node.y + node.radius:
+                                if node.color == GREEN:
+                                    node.color = WHITE 
+                                    node.text = None
+                                    counter-=1
+                                else:
+                                    if counter <= 2:
+                                        node.color = GREEN # change node color to green on right-click
+                                        node.text = str(counter) # set node COUNTER to current value of counter
+                                        return counter + 1
         elif event.type == pygame.MOUSEBUTTONUP:
             for node in node_list:
                 if node.dragging == True:
                     node.dragging = False
-                    node.color = node_color
+                    if node.color == RED:
+                        node.color = WHITE
+                    
         elif event.type == pygame.MOUSEMOTION:
             for node in node_list:
                 if node.dragging == True:
@@ -111,7 +134,7 @@ def handle_events(graph: Graph):
             screen_width = event.w
             screen_height = event.h
             screen = pygame.display.set_mode((screen_width, screen_height), pygame.RESIZABLE)
-
+    return counter
 
 main_graph = Graph()
 
@@ -123,7 +146,11 @@ notas = [
     Note(180, 200, 'Node2'),
     Note(200, 220, 'Node3'),
     Note(220, 240, 'Node4'),
-    Note(240, 260, 'Node5')
+    Note(240, 260, 'Node5'),
+    Note(260, 260, 'Node5'),
+    Note(280, 260, 'Node5'),
+    Note(300, 260, 'Node5'),
+    Note(320, 260, 'Node5'),
 ]
 
 arestas = [
@@ -144,9 +171,15 @@ for nota in notas:
 for aresta in arestas:
     main_graph.add_edge(aresta)
 
+
+running = True
+counter = 1
 while True:
-    handle_events(main_graph)
+    counter = handle_events(main_graph, counter)
     screen.fill((0, 0, 0))
-    draw_nodes(main_graph)
     draw_edges(main_graph)
+    draw_nodes(main_graph)
     pygame.display.update()
+
+# Quit pygame
+pygame.quit()

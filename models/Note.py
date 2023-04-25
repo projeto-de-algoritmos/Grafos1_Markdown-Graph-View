@@ -1,5 +1,5 @@
 class Note:
-    def __init__(self, x, y, filename: str, color=(255, 255, 255), radius=10):
+    def __init__(self, x, y, filename: str, color=(255, 255, 255), radius=10, text=None):
         self.filename = filename
         self.next = None
 
@@ -8,6 +8,7 @@ class Note:
         self.color = color
         self.dragging = False # flag to indicate if node is being dragged
         self.radius = radius
+        self.text = text
     
     def __str__(self):
         return self.filename
