@@ -2,6 +2,7 @@ import pygame
 import pygame_gui
 import sys
 import math
+import random
 
 from models.Graph import Graph, Edge
 from models.Note import Note
@@ -22,27 +23,16 @@ screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.RESIZABLE
 def draw_nodes(graph: Graph):
     for node, neighbors in graph.adj_list.items():
         pygame.draw.circle(screen, node.color, (node.x, node.y), node.radius)
-        if node.text is not None: # if the node has text
-            font = pygame.font.SysFont(None, 20)
-            if node.color != WHITE:
-                text_surface = font.render(node.text, True, WHITE)
-            else:
-                text_surface = font.render(node.text, True, BLACK)
-            text_rect = text_surface.get_rect(center=(node.x, node.y)) # get the rectangle that centers the text surface on the node position
-            screen.blit(text_surface, text_rect) # blit the text surface onto the screen at the text rectangle position
         font = pygame.font.SysFont(None, 20)
         label = font.render(node.filename, True, (255,255,255))
         screen.blit(label, (node.x - label.get_width() // 2, node.y - 20 - label.get_height()))
-
 
 def draw_arrow(screen, edge):
     start_node = edge.start_node
     end_node = edge.end_node
 
-    # calculate the angle between the two nodes
     angle = math.atan2(end_node.y - start_node.y, end_node.x - start_node.x)
 
-    # calculate the coordinates of the start and end points of the arrow
     start_x = start_node.x + start_node.radius * math.cos(angle)
     start_y = start_node.y + start_node.radius * math.sin(angle)
     end_x = end_node.x - end_node.radius * math.cos(angle)
@@ -52,7 +42,7 @@ def draw_arrow(screen, edge):
     pygame.draw.line(screen, edge.color, (start_x, start_y), (end_x, end_y), 1)
 
     # draw the arrowhead
-    arrow_size = 10
+    arrow_size = 5
     arrow_angle = math.pi / 6
     dx = arrow_size * math.cos(angle + arrow_angle)
     dy = arrow_size * math.sin(angle + arrow_angle)
@@ -62,14 +52,12 @@ def draw_arrow(screen, edge):
     point2 = (end_x - dx, end_y - dy)
     pygame.draw.polygon(screen, edge.color, [point1, point2, (end_x, end_y)])
 
-
 def draw_edges(graph: Graph):
     for edge in graph.edge_list:
         draw_arrow(screen, edge)
 
-
 def update_node_positions(graph: Graph, min_distance=100):
-    # calculate force vectors between nodes
+
     node_list = graph.get_nodes()
     for i in range(len(node_list)):
         for j in range(i+1, len(node_list)):
@@ -89,7 +77,16 @@ def update_node_positions(graph: Graph, min_distance=100):
                 node2.x += node2_x_force
                 node2.y += node2_y_force
 
-def handle_events(graph: Graph, counter: int):
+        if node1.x - node1.radius < 0:
+            node1.x = node1.radius
+        elif node1.x + node1.radius > SCREEN_WIDTH:
+            node1.x = SCREEN_WIDTH - node1.radius
+        if node1.y - node1.radius < 0:
+            node1.y = node1.radius
+        elif node1.y + node1.radius > SCREEN_HEIGHT:
+            node1.y = SCREEN_HEIGHT - node1.radius
+
+def handle_events(graph: Graph):
     node_list = graph.get_nodes()
     edge_list = graph.edge_list
     for event in pygame.event.get():
@@ -101,40 +98,44 @@ def handle_events(graph: Graph, counter: int):
                 if node.dragging == False:
                     if event.button == 1:
                         if node.x - node.radius <= event.pos[0] <= node.x + node.radius and node.y - node.radius <= event.pos[1] <= node.y + node.radius:
-                            if node.color == GREEN:
-                                node.text = None
-                                counter-=1
                             node.dragging = True
-                            node.color = RED # change node color when it is being dragged
-                    elif event.button == 3:
-                        if node.x - node.radius <= event.pos[0] <= node.x + node.radius and node.y - node.radius <= event.pos[1] <= node.y + node.radius:
-                                if node.color == GREEN:
-                                    node.color = WHITE 
-                                    node.text = None
-                                    counter-=1
-                                else:
-                                    if counter <= 2:
-                                        node.color = GREEN # change node color to green on right-click
-                                        node.text = str(counter) # set node COUNTER to current value of counter
-                                        return counter + 1
         elif event.type == pygame.MOUSEBUTTONUP:
             for node in node_list:
                 if node.dragging == True:
                     node.dragging = False
-                    if node.color == RED:
-                        node.color = WHITE
                     
         elif event.type == pygame.MOUSEMOTION:
             for node in node_list:
                 if node.dragging == True:
-                    node.update_position(event.pos[0], event.pos[1])
+                    node.update_position(event.pos[0], event.pos[1], SCREEN_WIDTH, SCREEN_HEIGHT)
             update_node_positions(graph)
+        
         elif event.type == pygame.VIDEORESIZE:
             # If the screen is resized, update the screen size
             screen_width = event.w
             screen_height = event.h
             screen = pygame.display.set_mode((screen_width, screen_height), pygame.RESIZABLE)
-    return counter
+
+def color_connected_components(graph):
+    visited = set()
+    colors = {}
+    color_index = 0
+
+    def dfs(node, color):
+        visited.add(node)
+        colors[node] = color
+        for neighbor in graph.adj_list[node]:
+            if neighbor not in visited:
+                dfs(neighbor, color)
+
+    for node in graph.get_nodes():
+        if node not in visited:
+            color = tuple(random.sample(range(0, 256), 3))  # generate a unique color for each connected component
+            dfs(node, color)
+            color_index += 1
+    
+    return colors
+
 
 main_graph = Graph()
 
@@ -147,10 +148,10 @@ notas = [
     Note(200, 220, 'Node3'),
     Note(220, 240, 'Node4'),
     Note(240, 260, 'Node5'),
-    Note(260, 260, 'Node5'),
-    Note(280, 260, 'Node5'),
-    Note(300, 260, 'Node5'),
-    Note(320, 260, 'Node5'),
+    Note(260, 260, 'Node6'),
+    Note(280, 260, 'Node7'),
+    Note(300, 260, 'Node8'),
+    Note(320, 260, 'Node9'),
 ]
 
 arestas = [
@@ -171,15 +172,30 @@ for nota in notas:
 for aresta in arestas:
     main_graph.add_edge(aresta)
 
-
 running = True
-counter = 1
-while True:
-    counter = handle_events(main_graph, counter)
-    screen.fill((0, 0, 0))
-    draw_edges(main_graph)
-    draw_nodes(main_graph)
-    pygame.display.update()
+colors = color_connected_components(main_graph)
+
+import asyncio
+
+async def paint_nodes(graph, colors):
+    for node in graph.get_nodes():
+        color = colors[node]
+        node.color = color
+        await asyncio.sleep(0.5)  # Add a delay between color updates
+
+async def main_loop(graph):
+    paint_task = asyncio.create_task(paint_nodes(graph, colors))
+    while running:
+        handle_events(main_graph)
+        screen.fill((0, 0, 0))
+        draw_edges(main_graph)
+        draw_nodes(main_graph)
+        pygame.display.update()
+        if paint_task.done():
+            await paint_task  # Wait for paint_nodes() to finish
+        await asyncio.sleep(0.001)  # Add a small delay between loop iterations
+
+asyncio.run(main_loop(main_graph))
 
 # Quit pygame
 pygame.quit()

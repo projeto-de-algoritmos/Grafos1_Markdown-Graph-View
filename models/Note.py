@@ -1,5 +1,5 @@
 class Note:
-    def __init__(self, x, y, filename: str, color=(255, 255, 255), radius=10, text=None):
+    def __init__(self, x, y, filename: str, color=(255, 255, 255), radius=10):
         self.filename = filename
         self.next = None
 
@@ -8,12 +8,22 @@ class Note:
         self.color = color
         self.dragging = False # flag to indicate if node is being dragged
         self.radius = radius
-        self.text = text
     
     def __str__(self):
         return self.filename
 
-    def update_position(self, new_x, new_y):
+    def update_position(self, new_x, new_y, screen_width, screen_height):
+        # Check if the new position would cause the circle to collide with the border
+        if new_x - self.radius < 0:
+            new_x = self.radius
+        elif new_x + self.radius > screen_width:
+            new_x = screen_width - self.radius
+        if new_y - self.radius < 0:
+            new_y = self.radius
+        elif new_y + self.radius > screen_height:
+            new_y = screen_height - self.radius
+
+        # Update the circle's position
         self.x = new_x
         self.y = new_y
 

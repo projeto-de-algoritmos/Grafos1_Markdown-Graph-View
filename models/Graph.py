@@ -43,6 +43,7 @@ class Graph:
         if edge.end_node not in self.adj_list:
             self.add_node(edge.end_node)
         self.adj_list[edge.start_node].add_node(edge.end_node)
+        self.adj_list[edge.end_node].add_node(edge.start_node)
 
     def bfs(self, start_node, end_node):
         visited = set()
