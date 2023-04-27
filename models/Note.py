@@ -12,16 +12,16 @@ class Note:
     def __str__(self):
         return self.filename
 
-    def update_position(self, new_x, new_y, screen_width, screen_height):
+    def update_position(self, new_x, new_y, screen):
         # Check if the new position would cause the circle to collide with the border
         if new_x - self.radius < 0:
             new_x = self.radius
-        elif new_x + self.radius > screen_width:
-            new_x = screen_width - self.radius
+        elif new_x + self.radius > screen.get_width():
+            new_x = screen.get_width() - self.radius
         if new_y - self.radius < 0:
             new_y = self.radius
-        elif new_y + self.radius > screen_height:
-            new_y = screen_height - self.radius
+        elif new_y + self.radius > screen.get_height():
+            new_y = screen.get_height() - self.radius
 
         # Update the circle's position
         self.x = new_x

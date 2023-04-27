@@ -1,5 +1,4 @@
 import pygame
-import pygame_gui
 import sys
 import math
 import random
@@ -16,11 +15,11 @@ GREEN = (0, 255, 0)
 WHITE = (255, 255, 255)
 BLACK = (0, 0, 0, 0)
 
-SCREEN_WIDTH = 800
-SCREEN_HEIGHT = 800
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.RESIZABLE)
+SCREEN_WIDTH = 600
+SCREEN_HEIGHT = 600
+screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_WIDTH), pygame.RESIZABLE)
 
-def draw_nodes(graph: Graph):
+def draw_nodes(screen, graph: Graph):
     for node, neighbors in graph.adj_list.items():
         pygame.draw.circle(screen, node.color, (node.x, node.y), node.radius)
         font = pygame.font.SysFont(None, 20)
@@ -52,11 +51,11 @@ def draw_arrow(screen, edge):
     point2 = (end_x - dx, end_y - dy)
     pygame.draw.polygon(screen, edge.color, [point1, point2, (end_x, end_y)])
 
-def draw_edges(graph: Graph):
+def draw_edges(screen, graph: Graph):
     for edge in graph.edge_list:
         draw_arrow(screen, edge)
 
-def update_node_positions(graph: Graph, min_distance=100):
+def update_node_positions(screen, graph: Graph, min_distance=100):
 
     node_list = graph.get_nodes()
     for i in range(len(node_list)):
@@ -79,16 +78,15 @@ def update_node_positions(graph: Graph, min_distance=100):
 
         if node1.x - node1.radius < 0:
             node1.x = node1.radius
-        elif node1.x + node1.radius > SCREEN_WIDTH:
-            node1.x = SCREEN_WIDTH - node1.radius
+        elif node1.x + node1.radius > screen.get_width():
+            node1.x = screen.get_width() - node1.radius
         if node1.y - node1.radius < 0:
             node1.y = node1.radius
-        elif node1.y + node1.radius > SCREEN_HEIGHT:
-            node1.y = SCREEN_HEIGHT - node1.radius
+        elif node1.y + node1.radius > screen.get_height():
+            node1.y = screen.get_height() - node1.radius
 
-def handle_events(graph: Graph):
+def handle_events(screen, graph: Graph):
     node_list = graph.get_nodes()
-    edge_list = graph.edge_list
     for event in pygame.event.get():
         if event.type == pygame.QUIT:
             pygame.quit()
@@ -107,8 +105,8 @@ def handle_events(graph: Graph):
         elif event.type == pygame.MOUSEMOTION:
             for node in node_list:
                 if node.dragging == True:
-                    node.update_position(event.pos[0], event.pos[1], SCREEN_WIDTH, SCREEN_HEIGHT)
-            update_node_positions(graph)
+                    node.update_position(event.pos[0], event.pos[1], screen)
+            update_node_positions(screen, graph)
         
         elif event.type == pygame.VIDEORESIZE:
             # If the screen is resized, update the screen size
@@ -186,10 +184,10 @@ async def paint_nodes(graph, colors):
 async def main_loop(graph):
     paint_task = asyncio.create_task(paint_nodes(graph, colors))
     while running:
-        handle_events(main_graph)
+        handle_events(screen, main_graph)
         screen.fill((0, 0, 0))
-        draw_edges(main_graph)
-        draw_nodes(main_graph)
+        draw_edges(screen, main_graph)
+        draw_nodes(screen, main_graph)
         pygame.display.update()
         if paint_task.done():
             await paint_task  # Wait for paint_nodes() to finish
