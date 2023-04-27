@@ -1,0 +1,2 @@
+# Series Temporais
+As séries temporais são um conjunto de dados em que as observações são coletadas ao longo do tempo. Esse tópico envolve a análise e modelagem de dados de séries temporais para fazer previsões futuras.

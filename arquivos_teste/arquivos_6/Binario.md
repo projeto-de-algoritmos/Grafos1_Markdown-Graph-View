@@ -1,0 +1,2 @@
+# Binario
+O sistema binário é composto por apenas dois dígitos, 0 e 1, e é a base de todos os sistemas digitais. Cada dígito binário representa um bit, que pode ser usado para representar um sinal elétrico de presença ou ausência, por exemplo.

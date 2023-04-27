@@ -1,0 +1,2 @@
+# Formula de Laplace
+A transformada de Laplace é uma técnica matemática usada para converter uma função no domínio do tempo em uma função no domínio da frequência. É amplamente utilizada na resolução de equações diferenciais e sistemas dinâmicos, pois permite transformar uma equação diferencial em uma equação algébrica.

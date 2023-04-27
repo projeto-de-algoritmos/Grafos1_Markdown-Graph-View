@@ -1,0 +1,2 @@
+# Eletronica
+É a área da engenharia que lida com o projeto e desenvolvimento de sistemas eletrônicos, incluindo dispositivos eletrônicos e sistemas de comunicação. Os engenheiros eletrônicos trabalham com componentes eletrônicos, circuitos e sistemas de controle para projetar dispositivos eletrônicos, sistemas de telecomunicações e outros equipamentos eletrônicos.

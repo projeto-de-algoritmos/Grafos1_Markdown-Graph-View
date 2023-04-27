@@ -1,0 +1,2 @@
+# Analise Exploratoria de Dados
+Este tópico envolve a coleta, organização e visualização de dados. Os métodos usados ​​para análise exploratória incluem gráficos, tabelas de frequência e medidas descritivas.

@@ -1,0 +1,2 @@
+# Regressao
+A regressão é um tópico que envolve a modelagem de uma relação entre duas ou mais variáveis. A regressão linear simples é um exemplo comum e envolve a modelagem de uma relação linear entre duas variáveis.

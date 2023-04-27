@@ -1,0 +1,2 @@
+# Dsitribuicao de Probabilidade
+Existem muitas distribuições de probabilidade diferentes, como a distribuição normal, distribuição binomial, distribuição de Poisson, entre outras. A escolha da distribuição apropriada depende dos dados e do problema em questão.

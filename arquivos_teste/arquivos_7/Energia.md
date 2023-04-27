@@ -1,0 +1,2 @@
+# Energia
+É a área da engenharia que lida com a produção, armazenamento, distribuição e uso de energia. Os engenheiros de energia trabalham com sistemas de energia renovável e não renovável, incluindo usinas elétricas, sistemas de energia solar e eólica, além de trabalharem com tecnologias para aumentar a eficiência energética em indústrias e residências.

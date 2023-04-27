@@ -1,0 +1,2 @@
+# Limite
+Limite é um conceito fundamental em cálculo que descreve o comportamento de uma função à medida que seu argumento se aproxima de um determinado valor. Formalmente, o limite de uma função f(x) quando x se aproxima de um ponto a é o valor que f(x) se aproxima quando x se aproxima de a. É usado para definir conceitos como continuidade e derivadas.

@@ -1,0 +1,2 @@
+# Hexadecimal
+O sistema hexadecimal é composto por 16 dígitos, de 0 a 9 e de A a F, e é muito utilizado em programação e eletrônica digital. Ele é usado para representar valores numéricos de forma mais compacta e fácil de ler em sistemas digitais. Por exemplo, cada dígito hexadecimal representa 4 bits binários, o que significa que um número hexadecimal de 8 dígitos pode ser representado em 32 bits binários.

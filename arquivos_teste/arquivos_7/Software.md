@@ -1,0 +1,2 @@
+# Software
+É a área que se concentra no desenvolvimento e manutenção de software. Os engenheiros de software trabalham com programação, teste, documentação e análise de requisitos para desenvolver sistemas de software complexos e de alta qualidade.

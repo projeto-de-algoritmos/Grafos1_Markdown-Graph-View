@@ -1,0 +1,2 @@
+# Integral
+Integral é a operação inversa da derivada. Ela é usada para calcular a área sob uma curva ou o volume de um sólido em três dimensões. A integral é definida como uma soma infinitesimal de áreas sob a curva de uma função, e pode ser calculada por meio de técnicas como integração por partes, substituição e frações parciais. Ela é essencial em muitas áreas da física, engenharia, economia e outras ciências aplicadas.

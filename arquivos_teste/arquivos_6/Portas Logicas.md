@@ -1,0 +1,2 @@
+# Portas Logicas
+Portas lógicas são componentes eletrônicos que realizam operações lógicas em sinais binários. As portas lógicas mais comuns são a AND, OR, NOT e XOR. Elas são usadas para construir circuitos combinacionais, que realizam operações lógicas em sinais de entrada para gerar sinais de saída.

@@ -1,0 +1,2 @@
+# Desconto
+Desconto é uma técnica usada para calcular o valor presente de fluxos de caixa futuros, considerando o valor do dinheiro no tempo. O desconto é usado para avaliar a rentabilidade de investimentos ao trazer os fluxos de caixa futuros para o valor presente, levando em consideração a taxa de juros, a inflação e outros fatores que afetam o valor do dinheiro ao longo do tempo.

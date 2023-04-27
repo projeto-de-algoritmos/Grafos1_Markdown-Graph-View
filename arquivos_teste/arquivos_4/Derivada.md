@@ -1,0 +1,2 @@
+# Derivada
+Derivada é a medida da taxa de variação instantânea de uma função em um ponto específico. Ela é definida como o limite da razão incremental entre a função e seu argumento, quando o intervalo de variação do argumento se aproxima de zero. A derivada é uma ferramenta importante para modelar taxas de variação e para calcular gradientes de funções, o que é útil em várias áreas da física, engenharia, economia, entre outras.

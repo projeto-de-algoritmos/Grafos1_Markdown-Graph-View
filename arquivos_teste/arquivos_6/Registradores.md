@@ -1,0 +1,2 @@
+# Registradores
+Registradores são circuitos eletrônicos que podem armazenar um número ou sequência de bits. Eles são usados em sistemas digitais para armazenar dados temporariamente e facilitar a realização de operações lógicas e aritméticas em sequência.

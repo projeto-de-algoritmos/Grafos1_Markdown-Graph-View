@@ -1,0 +1,2 @@
+# Contadores Digitais
+Contadores digitais são circuitos sequenciais que contam pulsos de entrada e geram uma saída binária correspondente ao número de pulsos contados. Eles podem ser usados em diversos sistemas digitais, como cronômetros, relógios, geradores de sinal e muitos outros.

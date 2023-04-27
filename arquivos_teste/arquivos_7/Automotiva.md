@@ -1,0 +1,2 @@
+# Automotiva
+É a área da engenharia que se concentra no projeto, desenvolvimento e fabricação de veículos automotivos. Os engenheiros automotivos trabalham com mecânica, materiais, eletrônica e outras áreas para projetar e testar veículos automotivos seguros, eficientes e sustentáveis.

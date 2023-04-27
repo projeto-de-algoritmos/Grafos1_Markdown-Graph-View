@@ -1,0 +1,2 @@
+# Analise de Risco
+Análise de risco é o processo de identificação, avaliação e gestão de riscos que podem afetar a rentabilidade e a viabilidade de um projeto ou investimento. A análise de risco ajuda a identificar os riscos potenciais e suas consequências, avaliar a probabilidade de ocorrência e desenvolver estratégias para mitigá-los. As técnicas de análise de risco incluem a análise de sensibilidade, análise de cenários e análise de Monte Carlo, que ajudam a quantificar e avaliar os riscos envolvidos em um investimento.

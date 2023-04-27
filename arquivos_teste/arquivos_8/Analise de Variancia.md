@@ -1,0 +1,2 @@
+# Analise de Variancia
+ é uma técnica estatística usada para comparar a média de duas ou mais amostras. A técnica permite determinar se as médias são estatisticamente significativamente diferentes umas das outras.

@@ -1,0 +1,2 @@
+# Flip-flops
+Flip-flops são circuitos sequenciais usados para armazenar um bit de informação. Eles são construídos a partir de portas lógicas e podem ser usados para implementar registradores, que são componentes eletrônicos usados para armazenar um número ou sequência de bits.

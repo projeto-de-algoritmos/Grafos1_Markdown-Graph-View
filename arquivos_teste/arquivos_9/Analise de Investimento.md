@@ -1,0 +1,2 @@
+# Analise de INvestimentos
+Análise de investimento é um processo que ajuda os gerentes a avaliar a viabilidade de um projeto ou investimento, levando em consideração os custos, benefícios e riscos envolvidos. A análise de investimento inclui técnicas como análise de fluxo de caixa, análise de valor presente líquido (VPL), análise de taxa interna de retorno (TIR) e análise de payback, que ajudam a comparar as alternativas de investimento e escolher a opção mais rentável e sustentável.

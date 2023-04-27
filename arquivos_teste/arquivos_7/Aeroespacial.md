@@ -1,0 +1,2 @@
+# Aeroespacial
+ É a área da engenharia que se concentra no projeto, desenvolvimento e fabricação de aeronaves, foguetes, satélites e outros veículos espaciais. Os engenheiros aeroespaciais trabalham com mecânica, materiais, eletrônica e outras áreas para projetar e testar veículos que possam voar com segurança e eficiência.

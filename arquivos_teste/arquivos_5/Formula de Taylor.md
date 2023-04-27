@@ -1,0 +1,2 @@
+# Formula de Taylor
+A fórmula de Taylor é um método para expressar uma função em termos de sua série de Taylor, que é uma série de potência que representa a função em um ponto específico. A fórmula de Taylor permite aproximar uma função por um polinômio, tornando possível calcular valores da função em pontos próximos ao ponto de expansão. A fórmula de Taylor é dada por f(x) = f(a) + f'(a)(x-a)/1! + f''(a)(x-a)^2/2! + f'''(a)(x-a)^3/3! + ... , onde f'(a), f''(a), f'''(a) e assim por diante são as derivadas da função f(x) no ponto a.

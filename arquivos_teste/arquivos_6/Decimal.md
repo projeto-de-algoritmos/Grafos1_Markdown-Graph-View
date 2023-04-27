@@ -1,0 +1,2 @@
+# Decimal
+O sistema decimal é composto por dez dígitos, de 0 a 9, e é o sistema numérico mais comum em uso diário. Ele é usado para representar quantidades em nossa vida cotidiana, como números de telefone, códigos postais, preços, entre outros.
