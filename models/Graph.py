@@ -3,14 +3,14 @@ from models.Note import Note
 from collections import deque
 
 class Edge:
-    def __init__(self, node1, node2, color=(255, 255, 255)):
-        self.node1 = node1
-        self.node2 = node2
+    def __init__(self, start_node, end_node, color=(255, 255, 255)):
+        self.start_node = start_node
+        self.end_node = end_node
         self.color = color
         self.spring_constant = 0.01
 
     def __str__(self):
-        return f"({str(self.node1)}, {str(self.node2)})"
+        return f"({str(self.start_node)}, {str(self.end_node)})"
 
     def __repr__(self):
         return str(self)
@@ -38,11 +38,12 @@ class Graph:
 
     def add_edge(self, edge):
         self.edge_list.append(edge)
-        if edge.node1 not in self.adj_list:
-            self.add_node(edge.node1)
-        if edge.node2 not in self.adj_list:
-            self.add_node(edge.node2)
-        self.adj_list[edge.node1].add_node(edge.node2)
+        if edge.start_node not in self.adj_list:
+            self.add_node(edge.start_node)
+        if edge.end_node not in self.adj_list:
+            self.add_node(edge.end_node)
+        self.adj_list[edge.start_node].add_node(edge.end_node)
+        self.adj_list[edge.end_node].add_node(edge.start_node)
 
     def bfs(self, start_node, end_node):
         visited = set()
@@ -94,10 +95,10 @@ if __name__ == '__main__':
 
     print(str(nosso_grafo)  + "\n\n")
     
-    node1 = notas[0]
-    node2 = notas[1]
+    start_node = notas[0]
+    end_node = notas[1]
 
-    path = nosso_grafo.bfs(node1, node2)
+    path = nosso_grafo.bfs(start_node, end_node)
     
     for i in path:
         print(i)
