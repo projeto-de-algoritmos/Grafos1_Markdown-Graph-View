@@ -2,7 +2,11 @@ import pygame
 import sys
 import math
 import random
+import os
+import re
+import networkx as nx
 
+from pygame.locals import *
 from models.Graph import Graph, Edge
 from models.Note import Note
 
@@ -13,7 +17,7 @@ pygame.init()
 RED = (255, 0, 0)
 GREEN = (0, 255, 0)
 WHITE = (255, 255, 255)
-BLACK = (0, 0, 0, 0)
+BLACK = (0, 0, 0)
 
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 700
@@ -110,9 +114,9 @@ def handle_events(screen, graph: Graph):
         
         elif event.type == pygame.VIDEORESIZE:
             # If the screen is resized, update the screen size
-            screen_width = event.w
-            screen_height = event.h
-            screen = pygame.display.set_mode((screen_width, screen_height), pygame.RESIZABLE)
+            SCREEN_WIDTH = event.w
+            SCREEN_HEIGHT = event.h
+            screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_HEIGHT), pygame.RESIZABLE | pygame.DOUBLEBUF)
 
 def color_connected_components(graph):
     visited = set()
@@ -121,20 +125,21 @@ def color_connected_components(graph):
 
     def dfs(node, color):
         visited.add(node)
-        colors[node] = color
+        colors[node] = (color[0], color[1], color[2], 255)
         for neighbor in graph.adj_list[node]:
             if neighbor not in visited:
                 dfs(neighbor, color)
 
     for node in graph.get_nodes():
         if node not in visited:
-            color = tuple(random.sample(range(0, 256), 3))  # generate a unique color for each connected component
+            color = tuple(random.randint(0, 255) for i in range(4))  # generate a unique color for each connected component
             dfs(node, color)
             color_index += 1
     
     return colors
 
 
+"""
 main_graph = Graph()
 
 notas = [
@@ -256,7 +261,9 @@ arestas = [
     Edge(notas[47], notas[49]),
     Edge(notas[47], notas[50]),
 
+
 ]
+
 
 for nota in notas:
     main_graph.add_node(nota)
@@ -288,6 +295,36 @@ async def main_loop(graph):
         await asyncio.sleep(0.001)  # Add a small delay between loop iterations
 
 asyncio.run(main_loop(main_graph))
+"""
 
 # Quit pygame
 pygame.quit()
+
+import os
+import re
+import networkx as nx
+
+def criar_grafo(diretorio):
+    # Cria um grafo vazio
+    grafo = nx.Graph()
+
+    # Obtém a lista de arquivos no diretório
+    lista_arquivos = os.listdir(diretorio)
+
+    # Itera sobre a lista de arquivos e cria um nó para cada um
+    for nome_arquivo in lista_arquivos:
+        # Cria um nó com o nome do arquivo
+        grafo.add_node(nome_arquivo)
+
+        # Abre o arquivo e procura por links para outros arquivos
+        with open(os.path.join(diretorio, nome_arquivo), "r") as arquivo:
+            conteudo = arquivo.read()
+            # Encontra todos os links para outros arquivos markdown
+            padrao_links = r"\[\[(.*?)\]\]"
+            links_encontrados = re.findall(padrao_links, conteudo)
+            # Cria uma aresta para cada link encontrado
+            for link in links_encontrados:
+                if link in lista_arquivos:
+                    grafo.add_edge(nome_arquivo, link)
+
+    return grafo
