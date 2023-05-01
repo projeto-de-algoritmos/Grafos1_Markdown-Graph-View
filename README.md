@@ -32,16 +32,16 @@ pip install -r requirements.txt
 
 Para isso, tenha uma pasta com seus arquivos markdown, e utilize o padrão [[FILE_NAME]] para referenciar outras notas. Por exemplo:
 
-|--Grafos.md
+|-- Grafos.md
 
 |-- Direcionados.md
 
 |-- Não Direcionados.md
 
 ```markdown (Grafos.md)
-Existem diversas técnicas e algoritmos para trabalhar com grafos, incluindo busca em profundidade, busca em largura,
-algoritmo de Dijkstra, algoritmo de Kruskal, entre outros. Essas técnicas são úteis para resolver problemas de caminho mais curto, 
-árvores geradoras mínimas, fluxo máximo, entre outros.
+Existem diversas técnicas e algoritmos para trabalhar com grafos, incluindo busca em profundidade, 
+busca em largura, algoritmo de Dijkstra, algoritmo de Kruskal, entre outros. Essas técnicas são úteis para resolver 
+problemas de caminho mais curto, árvores geradoras mínimas, fluxo máximo, entre outros.
 
 Os grafos podem ser [[Direcionados]]
 Os grafos podem ser [[Nao Direcionados]]
@@ -60,4 +60,3 @@ Sendo o parâmetro './arquivos_teste' o diretório raíz em que suas anotações
 ## Outros 
 - É crucial que os nomes dos arquivos e os nomes indicados dentro do referenciador de links esteja idêntico;
 - Qualquer referência a um arquivo inexistente ocasionará um erro no programa.
-
