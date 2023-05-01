@@ -4,12 +4,13 @@ import math
 import random
 import os
 import re
-import networkx as nx
+import networkx
+import pathlib
+import random
 
 from pygame.locals import *
 from models.Graph import Graph, Edge
 from models.Note import Note
-
 
 pygame.init()
 
@@ -22,6 +23,7 @@ BLACK = (0, 0, 0)
 SCREEN_WIDTH = 600
 SCREEN_HEIGHT = 700
 screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_WIDTH), pygame.RESIZABLE)
+
 
 def draw_nodes(screen, graph: Graph):
     for node, neighbors in graph.adj_list.items():
@@ -138,138 +140,35 @@ def color_connected_components(graph):
     
     return colors
 
+def criar_grafo(diretorio):
+    # Cria um grafo vazio
+    grafo = Graph()
 
-"""
-main_graph = Graph()
+    # Obtém a lista de arquivos no diretório
+    lista_arquivos = [path for path in pathlib.Path(diretorio).rglob("*.md")]
 
-notas = [
-    
-    Note(100, 110, 'Bancos de dados relacionais'), 
-    Note(110, 120, 'Declaracoes'), 
-    Note(120, 130, 'Instroducao ao SQL'), 
-    Note(130, 140, 'Tipo de dado'), 
+    grafo_dict = {}
+    # Itera sobre a lista de arquivos e cria um nó para cada um
+    for nome_arquivo in lista_arquivos:
 
-    Note(130, 260, 'Estutura de Dados'), 
-    Note(135, 260, 'Arrays'), 
-    Note(140, 260, 'Listas'), 
-    Note(145, 260, 'Pilhas'), 
-    Note(150, 260, 'Filas'), 
-    Note(155, 260, 'Arvores'), 
-    Note(160, 200, 'Grafos'), 
-    Note(165, 220, 'Direcionados'), 
-    Note(170, 240, 'Nao Direcionados'), 
+        # Abre o arquivo e procura por links para outros arquivos
+        with open(str(nome_arquivo), "r") as arquivo:
+            conteudo = arquivo.read()
+            # Encontra todos os links para outros arquivos markdown
+            padrao_links = r"\[\[(.*?)\]\]"
+            referencias = re.findall(padrao_links, conteudo)
 
-    Note(190, 120, 'Calculo 1'), 
-    Note(195, 140, 'Derivada'), 
-    Note(200, 160, 'Limite'), 
-    Note(205, 140, 'Integral'),
-    Note(210, 120, 'Calculo 2'), 
-    Note(215, 140, 'Series de Potencia'),
-    Note(220, 160, 'Formula de Taylor'),
-    Note(225, 140, 'Transformada de Laplace'),
+        grafo_dict[nome_arquivo.name[:-3]] = (Note(random.randint(5, 550),random.randint(5, 550), nome_arquivo.name[:-3]), referencias)
 
-    Note(200, 180, 'Pratica de Eletronica Digital 1'),
-    Note(180, 100, 'Teoria de Eletronica Digital 1'),
-    Note(190, 120, 'Sistemas Numericos'),
-    Note(160, 100, 'Binario'),
-    Note(170, 140, 'Decimal'),
-    Note(180, 150, 'Hexadecimal'),
-    Note(170, 100, 'Portas Logicas'),
-    Note(180, 100, 'Flip-flops'),
-    Note(140, 160, 'Registradores'),
-    Note(160, 130, 'Contadores Digitais'),
+    for valor in grafo_dict.values():
+         grafo.add_node(valor[0])
+         for referencia in valor[1]:
+              aresta = Edge(valor[0], grafo_dict[referencia][0])
+              grafo.add_edge(aresta)
+    print(grafo_dict)
+    return grafo
 
-    Note(300, 200, 'Introducao a Engenharia'),
-    Note(320, 210, 'Software'),
-    Note(325, 220, 'Eletronica'),
-    Note(330, 230, 'Aeroespacial'),
-    Note(335, 240, 'Energia'),
-    Note(340, 250, 'Automotiva'),
-
-    Note(360, 255, 'Probabilidade e Estatistica Aplicada a Engenharia'),
-    Note(180, 150, 'Inferencia Estatistica'), 
-    Note(190, 120, 'Probabilidade'),  
-    Note(160, 130, 'Distribuicoes de Probabilidade'), 
-    Note(240, 100, 'Analise Exploratoria de Dados'), 
-    Note(170, 140, 'Estatistica Descritiva'),  
-    Note(180, 150, 'Inferencia Estatistica'), 
-    Note(170, 100, 'Regressao'), 
-    Note(190, 120, 'Analise de Variancia'), 
-    Note(180, 100, 'Séries Temporais'),
-
-    Note(300, 200, 'Engenharia Economica'),
-    Note(320, 210, 'Desconto'),
-    Note(325, 220, 'Analise de Investimento'),
-    Note(330, 230, 'Analise de Risco'),
-
-]
-
-arestas = [
-    Edge(notas[0], notas[1]),
-    Edge(notas[1], notas[0]),
-    Edge(notas[2], notas[1]),
-    Edge(notas[2], notas[3]),
-    Edge(notas[3], notas[1]),
-
-    Edge(notas[4], notas[5]),
-    Edge(notas[4], notas[6]),
-    Edge(notas[4], notas[7]),
-    Edge(notas[4], notas[8]),
-    Edge(notas[4], notas[9]),
-    Edge(notas[4], notas[10]),
-    Edge(notas[10], notas[11]),
-    Edge(notas[10], notas[12]),
-
-    Edge(notas[13], notas[14]),
-    Edge(notas[14], notas[15]),
-    Edge(notas[14], notas[16]),
-    Edge(notas[13], notas[17]),
-    Edge(notas[17], notas[18]),
-    Edge(notas[17], notas[19]),
-    Edge(notas[17], notas[20]),
-
-    Edge(notas[21], notas[22]),
-    Edge(notas[22], notas[21]),
-    Edge(notas[22], notas[23]),
-    Edge(notas[23], notas[24]),
-    Edge(notas[23], notas[25]),
-    Edge(notas[23], notas[26]),
-    Edge(notas[22], notas[27]),
-    Edge(notas[22], notas[28]),
-    Edge(notas[22], notas[29]),
-    Edge(notas[22], notas[30]),
-
-    Edge(notas[31], notas[32]),
-    Edge(notas[31], notas[33]),
-    Edge(notas[31], notas[34]),
-    Edge(notas[31], notas[35]),
-    Edge(notas[31], notas[36]),
-
-    Edge(notas[37], notas[38]),
-    Edge(notas[37], notas[39]),
-    Edge(notas[37], notas[40]),
-    Edge(notas[39], notas[38]),
-    Edge(notas[39], notas[40]),
-    Edge(notas[37], notas[41]),
-    Edge(notas[37], notas[42]),
-    Edge(notas[37], notas[43]),
-    Edge(notas[37], notas[44]),
-    Edge(notas[37], notas[45]),
-    Edge(notas[37], notas[46]),
-
-    Edge(notas[47], notas[48]),
-    Edge(notas[47], notas[49]),
-    Edge(notas[47], notas[50]),
-
-
-]
-
-
-for nota in notas:
-    main_graph.add_node(nota)
-
-for aresta in arestas:
-    main_graph.add_edge(aresta)
+main_graph = criar_grafo ("C:/Users/marin/Desktop/UnB/Grafos1_Markdown-Graph-View/arquivos_teste")
 
 running = True
 colors = color_connected_components(main_graph)
@@ -295,36 +194,7 @@ async def main_loop(graph):
         await asyncio.sleep(0.001)  # Add a small delay between loop iterations
 
 asyncio.run(main_loop(main_graph))
-"""
 
 # Quit pygame
 pygame.quit()
 
-import os
-import re
-import networkx as nx
-
-def criar_grafo(diretorio):
-    # Cria um grafo vazio
-    grafo = nx.Graph()
-
-    # Obtém a lista de arquivos no diretório
-    lista_arquivos = os.listdir(diretorio)
-
-    # Itera sobre a lista de arquivos e cria um nó para cada um
-    for nome_arquivo in lista_arquivos:
-        # Cria um nó com o nome do arquivo
-        grafo.add_node(nome_arquivo)
-
-        # Abre o arquivo e procura por links para outros arquivos
-        with open(os.path.join(diretorio, nome_arquivo), "r") as arquivo:
-            conteudo = arquivo.read()
-            # Encontra todos os links para outros arquivos markdown
-            padrao_links = r"\[\[(.*?)\]\]"
-            links_encontrados = re.findall(padrao_links, conteudo)
-            # Cria uma aresta para cada link encontrado
-            for link in links_encontrados:
-                if link in lista_arquivos:
-                    grafo.add_edge(nome_arquivo, link)
-
-    return grafo
