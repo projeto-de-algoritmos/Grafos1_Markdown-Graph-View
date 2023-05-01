@@ -4,7 +4,6 @@ import math
 import random
 import re
 import pathlib
-import graphlib
 
 from pygame.locals import *
 from models.Graph import Graph, Edge
