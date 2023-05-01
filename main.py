@@ -195,4 +195,3 @@ asyncio.run(main_loop(main_graph))
 
 # Quit pygame
 pygame.quit()
-
