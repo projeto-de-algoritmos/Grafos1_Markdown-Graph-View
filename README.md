@@ -60,4 +60,4 @@ Sendo o parâmetro './arquivos_teste' o diretório raíz em que suas anotações
 
 ## Outros 
 - É crucial que os nomes dos arquivos e os nomes indicados dentro do referenciador de links esteja idêntico;
-- Qualquer referência a um arquivo inexistente ocasionará um erro no programa.
+- Qualquer referência a um arquivo inexistente ocasionará um erro no programa. 
