@@ -10,10 +10,9 @@
 
 ## Sobre 
 
-Nosso projeto consiste em uma interface visual para visualizar anotações, em formatos de grafos. Anotações podem ser relacionadas, apontando para outras anotações, criando uma maneira de caminhar ao longo das diversas anotações. O programa ao ser executado, indetifica as anotações e seus relacionamentos, e faz o display de todas elas em um grafo interativo.
+Nosso projeto consiste em uma interface visual para visualizar anotações, em formatos de grafos. As anotações podem ser relacionadas, apontando para outras anotações, criando uma maneira de caminhar ao longo das diversas anotações. O programa ao ser executado, indetifica as anotações e seus relacionamentos, e faz o display de todas elas em um grafo interativo.
 
-Os componentes conectados são então coloridos com a mesma cor, identificando as anotações que se relacionam.
-
+Os componentes conectados são então, coloridos com a mesma cor, identificando as anotações que se relacionam.
 
 ## Screenshots
 
@@ -24,21 +23,20 @@ Os componentes conectados são então coloridos com a mesma cor, identificando a
 ## Instalação 
 **Linguagem**: Python 3.9 + <br>
 
-Uma vez com o python instalado, execute o comando abaixo para instalar as dependências:
+Uma vez que o python for instalado, execute o comando abaixo para instalar as dependências:
 
 ```terminal
 pip install -r requirements.txt
 ```
 ## Uso 
 
-Para isso, tenha uma pasta com seus arquivos markdown, e utilize o padrão [[FILE_NAME]] para referenciar outras notas. Por exemplo
+Para isso, tenha uma pasta com seus arquivos markdown, e utilize o padrão [[FILE_NAME]] para referenciar outras notas. Por exemplo:
 
 |--Grafos.md
 
 |-- Direcionados.md
 
 |-- Não Direcionados.md
-
 
 ```markdown (Grafos.md)
 Existem diversas técnicas e algoritmos para trabalhar com grafos, incluindo busca em profundidade, busca em largura,
@@ -57,12 +55,8 @@ Para ser executado execute o comando:
 python main.py ./arquivos_teste
 ```
 
-Sendo o parâmetro './arquivos_teste' o diretório raíz em que suas anotações se encontram. Qualquer conjunto de arquivos que sigam as regras acima descritas é esperado que funcione.
+Sendo o parâmetro './arquivos_teste' o diretório raíz em que suas anotações se encontram. Qualquer conjunto de arquivos que sigam as regras acima é esperado que funcione.
 
 ## Outros 
-- É crucial que os nomes de arquivos e os nomes indicados dentro do referenciador de links esteja idêntico
-- Qualquer referência a um arquivo inexistente ocasionará um erro no programa
-
-
-
-
+- É crucial que os nomes dos arquivos e os nomes indicados dentro do referenciador de links esteja idêntico;
+- Qualquer referência a um arquivo inexistente ocasionará um erro no programa.
