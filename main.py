@@ -4,7 +4,7 @@ import math
 import random
 import re
 import pathlib
-import random
+import graphlib
 
 from pygame.locals import *
 from models.Graph import Graph, Edge
@@ -131,6 +131,7 @@ def color_connected_components(graph):
                 dfs(neighbor, color)
 
     for node in graph.get_nodes():
+
         if node not in visited:
             color = tuple(random.randint(0, 255) for i in range(4))  # generate a unique color for each connected component
             dfs(node, color)
@@ -166,7 +167,7 @@ def criar_grafo(arquivos_teste):
     print(grafo_dict)
     return grafo
 
-main_graph = criar_grafo ("./arquivos_teste")
+main_graph = criar_grafo("arquivos_teste")
 
 running = True
 colors = color_connected_components(main_graph)
