@@ -19,4 +19,4 @@ CREATE TABLE table_name (
 
 A estrutura do SQL varia bastante. O número de linhas usadas não é relevante. Uma declaração pode ser escrita em uma única linha ou quebrada em diversas linhas, se for mais fácil de compreender.
 
-Também é importante entender o conceito de [[Constantes SQL]], pois estar permitem alizar ações específicas
+Também é importante entender o conceito de [[Introducao ao SQL]], pois estar permitem alizar ações específicas

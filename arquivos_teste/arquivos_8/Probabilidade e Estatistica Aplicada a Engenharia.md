@@ -7,12 +7,12 @@ A disciplina de Probabilidade e Estatística Aplicada à Engenharia geralmente c
 
 Os engenheiros que têm conhecimentos sólidos em probabilidade e estatística estão melhor equipados para entender e analisar os dados gerados por seus projetos, o que pode levar a decisões mais bem informadas e a projetos mais eficientes e seguros. Portanto, é essencial que os estudantes de engenharia recebam uma formação sólida em Probabilidade e Estatística Aplicada à Engenharia.
 
-Em PEAE se estuda basicamente [[ Inferencia Estatistica ]]
-Em PEAE se estuda basicamente [[ Probabilidade ]]
-Em PEAE se estuda basicamente [[ Distribuicoes de Probabilidade]]
-Em PEAE se estuda basicamente [[ Analise Exploratoria de Dados]]
-Em PEAE se estuda basicamente [[ Estatistica Descritiva]]
-Em PEAE se estuda basicamente [[ Inferencia Estatistica]]
-Em PEAE se estuda basicamente [[ Regressao]]
-Em PEAE se estuda basicamente [[ Analise de Variancia]]
-Em PEAE se estuda basicamente [[ Series Temporais]]
+Em PEAE se estuda basicamente [[Inferencia Estatistica]]
+Em PEAE se estuda basicamente [[Probabilidade]]
+Em PEAE se estuda basicamente [[Distribuicoes de Probabilidade]]
+Em PEAE se estuda basicamente [[Analise Exploratoria de Dados]]
+Em PEAE se estuda basicamente [[Estatistica Descritiva]]
+Em PEAE se estuda basicamente [[Inferencia Estatistica]]
+Em PEAE se estuda basicamente [[Regressao]]
+Em PEAE se estuda basicamente [[Analise de Variancia]]
+Em PEAE se estuda basicamente [[Series Temporais]]

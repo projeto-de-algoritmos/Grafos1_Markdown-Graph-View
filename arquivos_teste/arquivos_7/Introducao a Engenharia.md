@@ -7,8 +7,8 @@ Os tópicos abordados na disciplina podem incluir a história da engenharia, as 
 
 Ao concluir a disciplina de introdução à engenharia, os estudantes devem estar equipados com uma base sólida em conceitos e habilidades fundamentais em engenharia, que serão necessários para progredir em suas carreiras em engenharia. Eles também devem ser capazes de avaliar as várias especializações em engenharia e determinar qual área de especialização é a melhor para eles, com base em seus interesses e habilidades.
 
-Nessa disciplina se vê um pouco sobre a engenharia de [[ Software]]
-Nessa disciplina se vê um pouco sobre a engenharia de [[ Eletronica]]
-Nessa disciplina se vê um pouco sobre a engenharia de [[ Aeroespacial]]
-Nessa disciplina se vê um pouco sobre a engenharia de [[ Energia]]
-Nessa disciplina se vê um pouco sobre a engenharia de [[ Automotiva]]
+Nessa disciplina se vê um pouco sobre a engenharia de [[Software]]
+Nessa disciplina se vê um pouco sobre a engenharia de [[Eletronica]]
+Nessa disciplina se vê um pouco sobre a engenharia de [[Aeroespacial]]
+Nessa disciplina se vê um pouco sobre a engenharia de [[Energia]]
+Nessa disciplina se vê um pouco sobre a engenharia de [[Automotiva]]

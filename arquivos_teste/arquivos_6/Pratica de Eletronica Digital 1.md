@@ -1,4 +1,4 @@
 # Pratica de Eletronica Digital 1
 A disciplina de Prática de Eletrônica Digital 1 geralmente é oferecida em cursos de Engenharia Eletrônica ou de Computação e se concentra na teoria e prática de circuitos digitais básicos. Os tópicos abordados incluem sistemas de numeração binária, portas lógicas, álgebra booleana, circuitos combinacionais e sequenciais, flip-flops, registradores, contadores, conversores analógico-digitais e digitais-analógicos, entre outros. Os alunos geralmente realizam experimentos em laboratório usando ferramentas de simulação de circuitos e equipamentos de medição para projetar, construir e testar circuitos digitais simples. O objetivo da disciplina é fornecer aos alunos uma compreensão sólida da eletrônica digital e prepará-los para disciplinas mais avançadas na área.
 
-Para se fazer a parte prática da disciplina é preciso fazer a [[ Teoria de Eletronica Digital 1]]
+Para se fazer a parte prática da disciplina é preciso fazer a [[Teoria de Eletronica Digital 1]]

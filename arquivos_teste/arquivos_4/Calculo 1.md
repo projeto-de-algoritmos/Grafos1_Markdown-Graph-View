@@ -7,6 +7,6 @@ Além disso, os estudantes de Cálculo 1 são introduzidos a conceitos como limi
 
 O conhecimento em Cálculo 1 é essencial para muitas áreas de estudo, incluindo ciências físicas e sociais, engenharia e economia. É também um pré-requisito comum para cursos posteriores de cálculo e análise matemática.
 
-Em calculo 1 se aprende [[ Limite]]
-Em calculo 1 se aprende [[ Derivada]]
-Em calculo 1 se aprende [[ Integral]]
+Em calculo 1 se aprende [[Limite]]
+Em calculo 1 se aprende [[Derivada]]
+Em calculo 1 se aprende [[Integral]]

@@ -11,6 +11,6 @@ Finalmente, Cálculo 2 aborda conceitos de geometria analítica, como vetores e 
 
 Em resumo, Cálculo 2 é uma disciplina fundamental para estudantes de ciências exatas e engenharias, pois fornece uma base sólida em conceitos matemáticos avançados que são aplicáveis em muitos campos.
 
-Em calculo 2 se aprende alguns conteudos como [[ Series de Potencia]]
-Em calculo 2 se aprende alguns conteudos como [[ Formula de Taylor]]
-Em calculo 2 se aprende alguns conteudos como [[ Transformada de Laplace]]
+Em calculo 2 se aprende alguns conteudos como [[Series de Potencia]]
+Em calculo 2 se aprende alguns conteudos como [[Formula de Taylor]]
+Em calculo 2 se aprende alguns conteudos como [[Transformada de Laplace]]

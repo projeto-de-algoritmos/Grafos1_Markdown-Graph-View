@@ -9,6 +9,6 @@ Além disso, a engenharia econômica também é usada para avaliar a viabilidade
 
 Em resumo, a engenharia econômica é uma ferramenta valiosa para ajudar as empresas e organizações a tomar decisões informadas sobre investimentos e projetos, considerando tanto as implicações financeiras quanto as técnicas e práticas de engenharia.
 
-Se estuda [[ Desconto]]
-Se estuda [[ Analise de Investimentos]]
-Se estuda [[ Analise de Risco]]
+Se estuda [[Desconto]]
+Se estuda [[Analise de Investimento]]
+Se estuda [[Analise de Risco]]
