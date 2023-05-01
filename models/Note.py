@@ -1,5 +1,5 @@
 class Note:
-    def __init__(self, x, y, filename: str, color=(255, 255, 255), radius=10):
+    def __init__(self, x, y, filename: str, color=(255, 255, 255), radius=8):
         self.filename = filename
         self.next = None
 

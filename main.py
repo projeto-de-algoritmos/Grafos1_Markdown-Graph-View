@@ -4,24 +4,11 @@ import math
 import random
 import re
 import pathlib
-import graphlib
+from create_graph import criar_grafo
 
 from pygame.locals import *
 from models.Graph import Graph, Edge
 from models.Note import Note
-
-pygame.init()
-
-#colors
-RED = (255, 0, 0)
-GREEN = (0, 255, 0)
-WHITE = (255, 255, 255)
-BLACK = (0, 0, 0)
-
-SCREEN_WIDTH = 600
-SCREEN_HEIGHT = 700
-screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_WIDTH), pygame.RESIZABLE)
-
 
 def draw_nodes(screen, graph: Graph):
     for node, neighbors in graph.adj_list.items():
@@ -139,60 +126,54 @@ def color_connected_components(graph):
     
     return colors
 
-def criar_grafo(arquivos_teste):
-    # Cria um grafo vazio
-    grafo = Graph()
 
-    # Obtém a lista de arquivos no diretório
-    lista_arquivos = [path for path in pathlib.Path(arquivos_teste).rglob("*.md")]
+import click
 
-    grafo_dict = {}
-    # Itera sobre a lista de arquivos e cria um nó para cada um
-    for nome_arquivo in lista_arquivos:
+@click.command()
+@click.argument('path')
+def main(path):
 
-        # Abre o arquivo e procura por links para outros arquivos
-        with open(str(nome_arquivo), "r") as arquivo:
-            conteudo = arquivo.read()
-            # Encontra todos os links para outros arquivos markdown
-            padrao_links = r"\[\[(.*?)\]\]"
-            referencias = re.findall(padrao_links, conteudo)
+    pygame.init()
 
-        grafo_dict[nome_arquivo.name[:-3]] = (Note(random.randint(5, 550),random.randint(5, 550), nome_arquivo.name[:-3]), referencias)
+    #colors
+    RED = (255, 0, 0)
+    GREEN = (0, 255, 0)
+    WHITE = (255, 255, 255)
+    BLACK = (0, 0, 0)
 
-    for valor in grafo_dict.values():
-         grafo.add_node(valor[0])
-         for referencia in valor[1]:
-              aresta = Edge(valor[0], grafo_dict[referencia][0])
-              grafo.add_edge(aresta)
-    print(grafo_dict)
-    return grafo
+    SCREEN_WIDTH = 600
+    SCREEN_HEIGHT = 700
+    screen = pygame.display.set_mode((SCREEN_WIDTH, SCREEN_WIDTH), pygame.RESIZABLE)
 
-main_graph = criar_grafo("arquivos_teste")
+    main_graph = criar_grafo(path)
 
-running = True
-colors = color_connected_components(main_graph)
+    running = True
+    colors = color_connected_components(main_graph)
 
-import asyncio
+    import asyncio
 
-async def paint_nodes(graph, colors):
-    for node in graph.get_nodes():
-        color = colors[node]
-        node.color = color
-        await asyncio.sleep(0.5)  # Add a delay between color updates
+    async def paint_nodes(graph, colors):
+        for node in graph.get_nodes():
+            color = colors[node]
+            node.color = color
+            await asyncio.sleep(0.5)  # Add a delay between color updates
 
-async def main_loop(graph):
-    paint_task = asyncio.create_task(paint_nodes(graph, colors))
-    while running:
-        handle_events(screen, main_graph)
-        screen.fill((0, 0, 0))
-        draw_edges(screen, main_graph)
-        draw_nodes(screen, main_graph)
-        pygame.display.update()
-        if paint_task.done():
-            await paint_task  # Wait for paint_nodes() to finish
-        await asyncio.sleep(0.001)  # Add a small delay between loop iterations
+    async def main_loop(graph):
+        paint_task = asyncio.create_task(paint_nodes(graph, colors))
+        while running:
+            handle_events(screen, main_graph)
+            screen.fill((0, 0, 0))
+            draw_edges(screen, main_graph)
+            draw_nodes(screen, main_graph)
+            pygame.display.update()
+            if paint_task.done():
+                await paint_task  # Wait for paint_nodes() to finish
+            await asyncio.sleep(0.001)  # Add a small delay between loop iterations
 
-asyncio.run(main_loop(main_graph))
+    asyncio.run(main_loop(main_graph))
 
-# Quit pygame
-pygame.quit()
+    # Quit pygame
+    pygame.quit()
+
+if __name__ == '__main__':
+    main()
