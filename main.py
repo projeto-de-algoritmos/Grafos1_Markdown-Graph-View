@@ -2,9 +2,7 @@ import pygame
 import sys
 import math
 import random
-import os
 import re
-import networkx
 import pathlib
 import random
 
