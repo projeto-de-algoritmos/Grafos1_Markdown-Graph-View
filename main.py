@@ -138,12 +138,12 @@ def color_connected_components(graph):
     
     return colors
 
-def criar_grafo(diretorio):
+def criar_grafo(arquivos_teste):
     # Cria um grafo vazio
     grafo = Graph()
 
     # Obtém a lista de arquivos no diretório
-    lista_arquivos = [path for path in pathlib.Path(diretorio).rglob("*.md")]
+    lista_arquivos = [path for path in pathlib.Path(arquivos_teste).rglob("*.md")]
 
     grafo_dict = {}
     # Itera sobre a lista de arquivos e cria um nó para cada um
@@ -166,7 +166,7 @@ def criar_grafo(diretorio):
     print(grafo_dict)
     return grafo
 
-main_graph = criar_grafo ("C:/Users/marin/Desktop/UnB/Grafos1_Markdown-Graph-View/arquivos_teste")
+main_graph = criar_grafo ("./arquivos_teste")
 
 running = True
 colors = color_connected_components(main_graph)
@@ -195,4 +195,3 @@ asyncio.run(main_loop(main_graph))
 
 # Quit pygame
 pygame.quit()
-
