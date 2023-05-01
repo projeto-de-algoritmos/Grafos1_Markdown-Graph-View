@@ -40,8 +40,9 @@ Para isso, tenha uma pasta com seus arquivos markdown, e utilize o padrão [[FIL
 
 ```markdown (Grafos.md)
 Existem diversas técnicas e algoritmos para trabalhar com grafos, incluindo busca em profundidade, 
-busca em largura, algoritmo de Dijkstra, algoritmo de Kruskal, entre outros. Essas técnicas são úteis para resolver 
-problemas de caminho mais curto, árvores geradoras mínimas, fluxo máximo, entre outros.
+busca em largura, algoritmo de Dijkstra, algoritmo de Kruskal, entre outros. 
+Essas técnicas são úteis para resolver problemas de caminho mais curto, árvores geradoras mínimas, 
+fluxo máximo, entre outros.
 
 Os grafos podem ser [[Direcionados]]
 Os grafos podem ser [[Nao Direcionados]]
